@@ -75,45 +75,6 @@ mod:hook("PlayerUnitWeaponRecoilExtension", "fixed_update",  function (func, c_s
 	end
 end)
 
-mod:hook("PlayerUnitWeaponRecoilExtension", "_update_unsteadiness", function(func, c_self, dt, t, recoil_component, recoil_control_component, recoil_settings, ...)
-	local unsteadiness = recoil_component.unsteadiness
-	local rise_end_time = recoil_control_component.rise_end_time
-	local decay_grace = recoil_settings.decay_grace or 0
-	local stat_buffs = c_self._buff_extension:stat_buffs()
-	local recoil_modifier = stat_buffs.recoil_modifier or 1
-	local num_shots = recoil_control_component.num_shots
-
-	if t <= rise_end_time then
-		--mod:echo("rise end time: " .. rise_end_time .. " t: " .. t)
-		local rise_index = math.min(num_shots, recoil_settings.num_rises)
-		local rise_percent = recoil_settings.rise[rise_index]
-		local unsteadiness_increase = rise_percent / recoil_settings.rise_duration * dt
-
-		unsteadiness = math.min(unsteadiness + unsteadiness_increase * recoil_modifier, 1)
-	else
-		local shooting = recoil_control_component.shooting
-		local shooting_grace_decay = t <= (rise_end_time + decay_grace)
-		local decay_percent = (shooting or shooting_grace_decay) and recoil_settings.decay.shooting or recoil_settings.decay.idle
-		local unsteadiness_decay = decay_percent * dt
-
-		unsteadiness = math.max(0, unsteadiness - unsteadiness_decay * (1 / recoil_modifier))
-
-		--if num_shots > 1 and unsteadiness < 0.75 then
-			--local override_shot_count = math.min(num_shots, math.floor(math.max(unsteadiness, 0) * 5))
-
-			--c_self._recoil_control_component.num_shots = override_shot_count
-		--end
-	end
-
-	unsteadiness = math.min(unsteadiness, 1)
-
-	if unsteadiness < 0.0001 then
-		return true
-	end
-
-	recoil_component.unsteadiness = unsteadiness 
-end)
-
 mod:hook("PlayerUnitWeaponRecoilExtension", "_update_offset", function(func, c_self, recoil_component, recoil_control_component, recoil_settings, t, ...)
 	local unsteadiness = recoil_component.unsteadiness
 	local old_pitch_offset = recoil_component.pitch_offset
