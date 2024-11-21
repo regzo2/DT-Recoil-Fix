@@ -14,7 +14,7 @@ return {
             {
                 setting_id      = "recoil_blending_lerp",
                 type            = "numeric",
-                default_value   = 0.9,
+                default_value   = 1,
                 range           = {0.2, 3},
                 decimals_number = 1
             },
