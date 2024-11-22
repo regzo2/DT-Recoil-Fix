@@ -8,12 +8,20 @@ return {
     debug_mode = {
         en = "Debug"
     },
-    recoil_blending_lerp = {
-        en = "Recoil Blending Speed"
+    recoil_move_lerp = {
+        en = "Recoil Movement Speed"
     },
-    recoil_blending_lerp_description = {
-        en = "Speed at which different recoil states blend together. "..
-             "Higher is faster and snappier, lower is slower and smoother. "..
-             "\n\n[Recommend]: 1"
+    recoil_move_lerp_description = {
+        en = "Speed at which recoil states blend together when changing movement states (between standing still, moving, and crouch standing still and crouch moving). "..
+             "Higher is faster and snappier, lower is slower and smoother."..
+             "\n\n[Recommend]: 1.5"
+    },
+    recoil_reset_lerp = {
+        en = "Recoil Reset Speed"
+    },
+    recoil_reset_lerp_description = {
+        en = "Speed at which recoil resets after 0.1 seconds and looking around. "..
+             "Higher is faster and snappier, lower is slower and smoother."..
+             "\n\n[Recommend]: 0.5"
     },
 }

@@ -12,10 +12,17 @@ return {
                 default_value   = false,
             },
             {
-                setting_id      = "recoil_blending_lerp",
+                setting_id      = "recoil_move_lerp",
                 type            = "numeric",
-                default_value   = 1,
-                range           = {0.2, 3},
+                default_value   = 1.5,
+                range           = {0.1, 3},
+                decimals_number = 1
+            },
+            {
+                setting_id      = "recoil_reset_lerp",
+                type            = "numeric",
+                default_value   = 0.5,
+                range           = {0.1, 3},
                 decimals_number = 1
             },
         },
